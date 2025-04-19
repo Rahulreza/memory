@@ -71,4 +71,9 @@ jobs:
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
           tag: ${{ github.ref_name }}  # This uses the tag name that triggered the workflow
+          name: "Release ${{ github.ref_name }}"
+          body: |
+            🎉 New release: ${{ github.ref_name }}
+            - Android APK built and attached
+            - Web build generated (available in artifacts)
           token: ${{ secrets.TOKEN }}
