@@ -1,9 +1,6 @@
 name: Flutter CI/CD
 
 on:
-  push:
-    tags:
-      - 'v*' # Triggers only on version tags like v1.0.0, v1.2.3, etc.
   pull_request:
     branches:
       - main
@@ -14,6 +11,8 @@ on:
       - main
       - dev
       - test
+    tags:
+      - 'v*' # Triggers only on version tags like v1.0.0, v1.2.3, etc.
 
 jobs:
   build:
@@ -45,8 +44,8 @@ jobs:
       - name: 🔍 Analyze
         run: flutter analyze
 
-      #      - name: 🧪 Run Tests
-      #        run: flutter test
+#      - name: 🧪 Run Tests
+#        run: flutter test
 
       - name: 📦 Build Android APK
         run: flutter build apk --release
@@ -54,18 +53,17 @@ jobs:
       - name: 🌐 Build Flutter Web
         run: flutter build web
 
-      - name: 📤 Upload APK Artifact
+      - name: 📤 Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: 📤 Upload Web Build Artifact
+      - name: 📤 Upload Web Build
         uses: actions/upload-artifact@v4
         with:
           name: web-build
           path: build/web
-
   release:
     name: Release Build
     needs: build
