@@ -1,10 +1,16 @@
 name: Flutter CI/CD
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - dev
+      - test
+  push:
+    branches:
+      - main
+      - dev
+      - test
 
 jobs:
   build:
@@ -13,7 +19,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🛠️ Setup Flutter
         uses: subosito/flutter-action@v2
