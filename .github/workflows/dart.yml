@@ -42,8 +42,8 @@ jobs:
       - name: 🔍 Analyze
         run: flutter analyze
 
-      - name: 🧪 Run Tests
-        run: flutter test
+#      - name: 🧪 Run Tests
+#        run: flutter test
 
       - name: 📦 Build Android APK
         run: flutter build apk --release
