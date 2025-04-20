@@ -11,6 +11,7 @@ void main() async {
 
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>('notes');
+
   runApp(const MyApp());
 }
 
