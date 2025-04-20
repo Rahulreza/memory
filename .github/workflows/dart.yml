@@ -38,8 +38,7 @@ jobs:
         run: flutter pub get
 
       - name: ✅ Format Check
-        run: |
-          dart format --set-exit-if-changed . || echo "Formatting issues found."
+        run: dart format --set-exit-if-changed .
 
       - name: 🔍 Analyze
         run: flutter analyze
