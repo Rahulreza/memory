@@ -1,30 +1,33 @@
-import '../../../path/file_path.dart';
+import 'package:intl/intl.dart';
 
-class NoteOverviewScreen extends StatelessWidget {
-  const NoteOverviewScreen({super.key});
+import '../../../../path/file_path.dart';
+
+class AgeProfileOverviewScreen extends StatelessWidget {
+  const AgeProfileOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<NoteBloc, NoteState>(
+      body: BlocBuilder<AgeProfileBloc, AgeProfileState>(
         builder: (context, state) {
-          if (state.status == NoteStatus.loading && state.notes.isEmpty) {
+          if (state.status == AgeProfileStatus.loading &&
+              state.profiles.isEmpty) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state.status == NoteStatus.failure &&
-              state.notes.isEmpty) {
+          } else if (state.status == AgeProfileStatus.failure &&
+              state.profiles.isEmpty) {
             return Center(
-              child: Text('Failed to load notes: ${state.errorMessage}'),
+              child: Text('Failed to load profiles: ${state.errorMessage}'),
             );
-          } else if (state.notes.isEmpty) {
-            return const Center(child: Text('No notes yet. Add one!'));
+          } else if (state.profiles.isEmpty) {
+            return const Center(child: Text('No profiles yet. Add one!'));
           }
 
           return ListView.builder(
-            itemCount: state.notes.length,
+            itemCount: state.profiles.length,
             itemBuilder: (context, index) {
-              final note = state.notes[index];
+              final profile = state.profiles[index];
               return Dismissible(
-                key: Key(note.key.toString()),
+                key: Key(profile.key.toString()),
                 direction: DismissDirection.endToStart,
                 background: Container(
                   color: Colors.red,
@@ -39,7 +42,7 @@ class NoteOverviewScreen extends StatelessWidget {
                       return AlertDialog(
                         title: const Text("Confirm Delete"),
                         content: const Text(
-                          "Are you sure you want to delete this note?",
+                          "Are you sure you want to delete this profile?",
                         ),
                         actions: <Widget>[
                           TextButton(
@@ -56,27 +59,27 @@ class NoteOverviewScreen extends StatelessWidget {
                   );
                 },
                 onDismissed: (direction) {
-                  context.read<NoteBloc>().add(
-                    NoteEvent.deleteNoteEvent(noteKey: note.key),
+                  context.read<AgeProfileBloc>().add(
+                    AgeProfileEvent.deleteProfileEvent(profileKey: profile.key),
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('${note.title} dismissed'),
+                      content: Text('${profile.name} dismissed'),
                       action: SnackBarAction(label: 'Undo', onPressed: () {}),
                     ),
                   );
                 },
                 child: ListTile(
-                  title: Text(note.title),
+                  title: Text(profile.name),
                   subtitle: Text(
-                    '${note.description}\n${note.date.toLocal().toString().split(' ')[0]}',
+                    'Born: ${DateFormat('yyyy-MM-dd').format(profile.birthDate)} (Age: ${profile.age})',
                   ),
-                  isThreeLine: true,
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => AddEditNoteScreen(note: note),
+                        builder:
+                            (_) => AddEditAgeProfileScreen(profile: profile),
                       ),
                     );
                   },
@@ -90,10 +93,10 @@ class NoteOverviewScreen extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const AddEditNoteScreen()),
+            MaterialPageRoute(builder: (_) => const AddEditAgeProfileScreen()),
           );
         },
-        tooltip: 'Add Note',
+        tooltip: 'Add Profile',
         child: const Icon(Icons.add),
       ),
     );

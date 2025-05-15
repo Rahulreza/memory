@@ -1,9 +1,4 @@
-
-
-
 import 'core/path/file_path.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

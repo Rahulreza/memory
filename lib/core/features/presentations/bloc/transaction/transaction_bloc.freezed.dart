@@ -133,15 +133,25 @@ class __$$AddTransactionEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddTransactionEventImpl implements _AddTransactionEvent {
+class _$AddTransactionEventImpl
+    with DiagnosticableTreeMixin
+    implements _AddTransactionEvent {
   const _$AddTransactionEventImpl({required this.transaction});
 
   @override
   final TransactionModel transaction;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TransactionEvent.addTransactionEvent(transaction: $transaction)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TransactionEvent.addTransactionEvent'))
+      ..add(DiagnosticsProperty('transaction', transaction));
   }
 
   @override
@@ -307,7 +317,9 @@ class __$$UpdateTransactionEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateTransactionEventImpl implements _UpdateTransactionEvent {
+class _$UpdateTransactionEventImpl
+    with DiagnosticableTreeMixin
+    implements _UpdateTransactionEvent {
   const _$UpdateTransactionEventImpl(
       {required this.originalTransactionKey,
       required this.updatedTransactionData});
@@ -318,8 +330,20 @@ class _$UpdateTransactionEventImpl implements _UpdateTransactionEvent {
   final TransactionModel updatedTransactionData;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TransactionEvent.updateTransactionEvent(originalTransactionKey: $originalTransactionKey, updatedTransactionData: $updatedTransactionData)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'TransactionEvent.updateTransactionEvent'))
+      ..add(
+          DiagnosticsProperty('originalTransactionKey', originalTransactionKey))
+      ..add(DiagnosticsProperty(
+          'updatedTransactionData', updatedTransactionData));
   }
 
   @override
@@ -488,15 +512,26 @@ class __$$DeleteTransactionEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeleteTransactionEventImpl implements _DeleteTransactionEvent {
+class _$DeleteTransactionEventImpl
+    with DiagnosticableTreeMixin
+    implements _DeleteTransactionEvent {
   const _$DeleteTransactionEventImpl({required this.transactionKey});
 
   @override
   final dynamic transactionKey;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TransactionEvent.deleteTransactionEvent(transactionKey: $transactionKey)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'TransactionEvent.deleteTransactionEvent'))
+      ..add(DiagnosticsProperty('transactionKey', transactionKey));
   }
 
   @override
@@ -641,12 +676,21 @@ class __$$FetchTransactionsEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchTransactionsEventImpl implements _FetchTransactionsEvent {
+class _$FetchTransactionsEventImpl
+    with DiagnosticableTreeMixin
+    implements _FetchTransactionsEvent {
   const _$FetchTransactionsEventImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TransactionEvent.fetchTransactionsEvent()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'TransactionEvent.fetchTransactionsEvent'));
   }
 
   @override
@@ -858,7 +902,9 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransactionStateImpl implements _TransactionState {
+class _$TransactionStateImpl
+    with DiagnosticableTreeMixin
+    implements _TransactionState {
   const _$TransactionStateImpl(
       {final List<TransactionModel> transactions = const [],
       this.status = TransactionStatus.initial,
@@ -881,8 +927,18 @@ class _$TransactionStateImpl implements _TransactionState {
   final String? errorMessage;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TransactionState(transactions: $transactions, status: $status, errorMessage: $errorMessage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TransactionState'))
+      ..add(DiagnosticsProperty('transactions', transactions))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('errorMessage', errorMessage));
   }
 
   @override

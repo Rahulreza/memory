@@ -38,15 +38,9 @@ class _MyAppState extends State<MyApp> {
       builder: (_, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider<NoteBloc>.value(
-              value: _noteBloc,
-            ),
-            BlocProvider<AgeProfileBloc>.value(
-              value: _ageProfileBloc,
-            ),
-            BlocProvider<TransactionBloc>.value(
-              value: _transactionBloc,
-            ),
+            BlocProvider<NoteBloc>.value(value: _noteBloc),
+            BlocProvider<AgeProfileBloc>.value(value: _ageProfileBloc),
+            BlocProvider<TransactionBloc>.value(value: _transactionBloc),
           ],
           child: MaterialApp(
             title: 'Memory',
