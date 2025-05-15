@@ -1,38 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'model.dart';
+part of 'age_profile_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class NoteModelAdapter extends TypeAdapter<NoteModel> {
+class AgeProfileModelAdapter extends TypeAdapter<AgeProfileModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  NoteModel read(BinaryReader reader) {
+  AgeProfileModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return NoteModel(
-      title: fields[0] as String,
-      description: fields[1] as String,
-      date: fields[2] as DateTime,
+    return AgeProfileModel(
+      name: fields[0] as String,
+      birthDate: fields[1] as DateTime,
     );
   }
 
   @override
-  void write(BinaryWriter writer, NoteModel obj) {
+  void write(BinaryWriter writer, AgeProfileModel obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.title)
-      ..writeByte(1)
-      ..write(obj.description)
       ..writeByte(2)
-      ..write(obj.date);
+      ..writeByte(0)
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.birthDate);
   }
 
   @override
@@ -41,7 +38,7 @@ class NoteModelAdapter extends TypeAdapter<NoteModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is NoteModelAdapter &&
+      other is AgeProfileModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
