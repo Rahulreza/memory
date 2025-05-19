@@ -16,6 +16,7 @@ export 'package:memory/core/features/presentations/pages/age/add_edit_age_profil
 export 'package:memory/core/features/presentations/pages/age/age_profile_list_screen.dart';
 export 'package:memory/core/features/presentations/pages/note/note_overview_screen.dart';
 export 'package:memory/core/features/presentations/pages/transaction/transaction_list_screen.dart';
+
 export 'package:memory/core/features/presentations/widgets/multiple_border_less_toggle_bar.dart';
 export 'package:memory/core/features/presentations/pages/transaction/add_edit_transaction_screen.dart';
 export 'package:memory/core/features/data/model/transaction_model/transaction_type.dart';

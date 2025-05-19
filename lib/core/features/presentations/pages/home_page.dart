@@ -1,3 +1,4 @@
+
 import '../../../path/file_path.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Notes', icon: Icon(Icons.note)),
-              Tab(text: 'Profiles', icon: Icon(Icons.person)),
+              Tab(text: 'Ages', icon: Icon(Icons.person)),
               Tab(text: 'Transactions', icon: Icon(Icons.attach_money)),
             ],
           ),
