@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _noteBloc = NoteBloc();
     _ageProfileBloc = AgeProfileBloc();
-    _transactionBloc = TransactionBloc();
+    _transactionBloc = TransactionBloc(); // This bloc needs its handlers fixed too
   }
 
   @override
@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     _noteBloc.close();
     _ageProfileBloc.close();
     _transactionBloc.close();
-    Hive.close();
+    Hive.close(); // Only close Hive here if you are sure no other parts of your app depend on it being open.
     super.dispose();
   }
 

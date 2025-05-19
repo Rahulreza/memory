@@ -1,6 +1,5 @@
 part of 'note_bloc.dart';
 
-
 enum NoteStatus { initial, loading, success, failure }
 
 @freezed
@@ -11,4 +10,3 @@ class NoteState with _$NoteState {
     String? errorMessage,
   }) = _NoteState;
 }
-

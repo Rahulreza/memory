@@ -22,8 +22,8 @@ class HomeScreen extends StatelessWidget {
         body: const TabBarView(
           children: [
             NoteOverviewScreen(),
-            Center(child: Text('Age Profiles Screen Content')),
-            Center(child: Text('Transactions Screen Content')),
+            AgeProfileOverviewScreen(),
+            TransactionOverviewScreen(),
           ],
         ),
       ),

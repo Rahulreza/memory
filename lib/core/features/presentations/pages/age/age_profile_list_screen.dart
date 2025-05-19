@@ -1,3 +1,4 @@
+
 import 'package:intl/intl.dart';
 
 import '../../../../path/file_path.dart';
@@ -10,15 +11,13 @@ class AgeProfileOverviewScreen extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<AgeProfileBloc, AgeProfileState>(
         builder: (context, state) {
-          if (state.status == AgeProfileStatus.loading &&
-              state.profiles.isEmpty) {
+          if (state.status == AgeProfileStatus.loading && state.profiles.isEmpty) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state.status == AgeProfileStatus.failure &&
-              state.profiles.isEmpty) {
+          } else if (state.status == AgeProfileStatus.failure && state.profiles.isEmpty) {
             return Center(
               child: Text('Failed to load profiles: ${state.errorMessage}'),
             );
-          } else if (state.profiles.isEmpty) {
+          } else if (state.profiles.isEmpty && state.status != AgeProfileStatus.loading) {
             return const Center(child: Text('No profiles yet. Add one!'));
           }
 
@@ -65,7 +64,12 @@ class AgeProfileOverviewScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('${profile.name} dismissed'),
-                      action: SnackBarAction(label: 'Undo', onPressed: () {}),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          // Undo logic would go here if implemented (e.g., dispatch an undo event)
+                        },
+                      ),
                     ),
                   );
                 },

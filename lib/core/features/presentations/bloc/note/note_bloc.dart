@@ -1,5 +1,3 @@
-
-
 import '../../../../path/file_path.dart';
 
 part 'note_event.dart';
@@ -10,16 +8,20 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   late Box<NoteModel> _noteBox;
 
   NoteBloc() : super(const NoteState()) {
-    _init();
-
     on<_AddNoteEvent>(_onAddNote);
     on<_UpdateNoteEvent>(_onUpdateNote);
     on<_DeleteNoteEvent>(_onDeleteNote);
     on<_FetchNotesEvent>(_onFetchNotes);
+
+    _init();
   }
 
   Future<void> _init() async {
-    _noteBox = Hive.box<NoteModel>('notes');
+    if (!Hive.isBoxOpen('notes')) {
+      _noteBox = await Hive.openBox<NoteModel>('notes');
+    } else {
+      _noteBox = Hive.box<NoteModel>('notes');
+    }
     add(const NoteEvent.fetchNotesEvent());
     _noteBox.watch().listen((_) => add(const NoteEvent.fetchNotesEvent()));
   }
@@ -28,7 +30,6 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     emit(state.copyWith(status: NoteStatus.loading));
     try {
       await _noteBox.add(event.note);
-      emit(state.copyWith(status: NoteStatus.success));
     } catch (e) {
       emit(state.copyWith(status: NoteStatus.failure, errorMessage: e.toString()));
     }
@@ -38,7 +39,6 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     emit(state.copyWith(status: NoteStatus.loading));
     try {
       await _noteBox.put(event.originalNoteKey, event.updatedNoteData);
-      emit(state.copyWith(status: NoteStatus.success));
     } catch (e) {
       emit(state.copyWith(status: NoteStatus.failure, errorMessage: e.toString()));
     }
@@ -48,16 +48,16 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     emit(state.copyWith(status: NoteStatus.loading));
     try {
       await _noteBox.delete(event.noteKey);
-      emit(state.copyWith(status: NoteStatus.success));
     } catch (e) {
       emit(state.copyWith(status: NoteStatus.failure, errorMessage: e.toString()));
     }
   }
 
-  void _onFetchNotes(_FetchNotesEvent event, Emitter<NoteState> emit) {
+  Future<void> _onFetchNotes(_FetchNotesEvent event, Emitter<NoteState> emit) async {
+    emit(state.copyWith(status: NoteStatus.loading));
     try {
       final notes = _noteBox.values.toList();
-      emit(state.copyWith(status: NoteStatus.success, notes: notes));
+      emit(state.copyWith(status: NoteStatus.success, notes: notes, errorMessage: null));
     } catch (e) {
       emit(state.copyWith(status: NoteStatus.failure, errorMessage: e.toString()));
     }

@@ -1,5 +1,3 @@
-
-
 import '../../../../path/file_path.dart';
 
 class AddEditNoteScreen extends StatefulWidget {

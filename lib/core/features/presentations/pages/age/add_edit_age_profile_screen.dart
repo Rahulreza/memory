@@ -1,3 +1,4 @@
+
 import 'package:intl/intl.dart';
 
 import '../../../../path/file_path.dart';
@@ -38,18 +39,14 @@ class _AddEditAgeProfileScreenState extends State<AddEditAgeProfileScreen> {
         return;
       }
 
-      // Create a new AgeProfileModel instance with the updated data
       final updatedProfileData = AgeProfileModel(
         name: name,
         birthDate: birthDate,
       );
 
       if (widget.profile != null) {
-        // If editing an existing profile, get the original key
         final originalKey = widget.profile!.key;
         if (originalKey != null) {
-          // Dispatch the update event with the original key and the new data
-          // Use the correct named parameters as defined in AgeProfileEvent
           context.read<AgeProfileBloc>().add(
             AgeProfileEvent.updateProfileEvent(
               originalProfileKey: originalKey,
@@ -65,7 +62,6 @@ class _AddEditAgeProfileScreenState extends State<AddEditAgeProfileScreen> {
           return;
         }
       } else {
-        // If adding a new profile, dispatch the add event
         context.read<AgeProfileBloc>().add(
           AgeProfileEvent.addProfileEvent(profile: updatedProfileData),
         );
@@ -161,24 +157,24 @@ class _AddEditAgeProfileScreenState extends State<AddEditAgeProfileScreen> {
                     const Spacer(),
                     ElevatedButton(
                       onPressed:
-                          state.status == AgeProfileStatus.loading
-                              ? null
-                              : _saveProfile,
+                      state.status == AgeProfileStatus.loading
+                          ? null
+                          : _saveProfile,
                       child:
-                          state.status == AgeProfileStatus.loading
-                              ? const SizedBox(
-                                width: 24,
-                                height: 24,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                  strokeWidth: 3,
-                                ),
-                              )
-                              : Text(
-                                widget.profile != null
-                                    ? 'Update Profile'
-                                    : 'Save Profile',
-                              ),
+                      state.status == AgeProfileStatus.loading
+                          ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 3,
+                        ),
+                      )
+                          : Text(
+                        widget.profile != null
+                            ? 'Update Profile'
+                            : 'Save Profile',
+                      ),
                     ),
                   ],
                 ),
